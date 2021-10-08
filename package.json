@@ -1,0 +1,30 @@
+{
+  "name": "game-of-life",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --watchAll --collect-coverage",
+    "compile-test": "npx sass src/styles.scss build/styles.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FranMedic/W02-Weekend-Franny-Medico.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FranMedic/W02-Weekend-Franny-Medico/issues"
+  },
+  "homepage": "https://github.com/FranMedic/W02-Weekend-Franny-Medico#readme",
+  "dependencies": {
+    "eslint-config-prettier": "^8.3.0",
+    "jest": "^27.2.5",
+    "sass": "^1.42.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.24.2"
+  }
+}
