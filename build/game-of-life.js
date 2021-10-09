@@ -2,7 +2,6 @@ const dimensionTabla = 5;
 const tablaTotal = Array(dimensionTabla)
   .fill(0)
   .map(() => Array(dimensionTabla).fill(0)); // filas y columnas INVESTIGAR
-
 tablaTotal[1][2] = 1;
 tablaTotal[2][2] = 1;
 tablaTotal[3][2] = 1;
@@ -13,13 +12,13 @@ tablaTotal[3][2] = 1;
 // (si sus posiciones tienen un 1, el contador sube)
 // cuatro una vez recogidos, cuantos vecinos estan alrededor de cada posicion del array,
 
-function checkVida(tabla, count) {
+function checkVida(tabla) {
   const nuevoJuego = Array(dimensionTabla)
     .fill(0)
     .map(() => Array(dimensionTabla).fill(0));
-  if (count === 0) {
-    return;
-  }
+  // if (count === 0) {
+  // return;
+  // }
   for (let i = 0; i < tabla.length; i++) {
     for (let j = 0; j < tabla[i].length; j++) {
       // eslint-disable-next-line no-use-before-define
@@ -42,8 +41,8 @@ function checkVida(tabla, count) {
       }
     }
   }
-  console.log(nuevoJuego);
-  checkVida(nuevoJuego, count - 1);
+
+  return nuevoJuego;
 }
 
 function checkVecinos(juego, x, y) {
@@ -79,5 +78,8 @@ function checkVecinos(juego, x, y) {
   }
   return contador;
 }
-console.table(tablaTotal);
-checkVida(tablaTotal, 2);
+
+module.exports = {
+  checkVida,
+  checkVecinos,
+};
