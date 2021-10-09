@@ -88,8 +88,39 @@ describe("When gave checkVida function", () => {
   });
 });
 
-describe("When it recieves checkVecinos function", () => {
-  describe("", () => {
-    test("", () => {});
+describe("When gave checkVecinos function", () => {
+  describe("it recieves and array and a position of the array in the middle", () => {
+    test("it should return contador=2", () => {
+      const dimensionTabla = 5;
+      const tablaPrueba = Array(dimensionTabla)
+        .fill(0)
+        .map(() => Array(dimensionTabla).fill(0));
+
+      tablaPrueba[1][0] = 1;
+      tablaPrueba[1][1] = 1;
+      const expected = 2;
+
+      const result = checkVecinos(tablaPrueba, 0, 0);
+
+      expect(result).toBe(expected);
+    });
+  });
+
+  describe("it recieves and array and a position of the array in a corner", () => {
+    test("it should return contador=1", () => {
+      const dimensionTabla = 5;
+      const tablaPrueba = Array(dimensionTabla)
+        .fill(0)
+        .map(() => Array(dimensionTabla).fill(0));
+
+      tablaPrueba[0][1] = 0;
+      tablaPrueba[1][1] = 1;
+      tablaPrueba[1][0] = 0;
+      const expected = 1;
+
+      const result = checkVecinos(tablaPrueba, 0, 0);
+
+      expect(result).toBe(expected);
+    });
   });
 });
