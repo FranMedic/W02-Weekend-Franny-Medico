@@ -1,5 +1,5 @@
-console.log(tamaño);
-let tablaTotal = Array(tamaño)
+const tamaño = 5;
+const tablaTotal = Array(tamaño)
   .fill(0)
   .map(() => Array(tamaño).fill(0)); // filas y columnas INVESTIGAR
 
@@ -31,7 +31,7 @@ function checkVida(tabla) {
     }
   }
 
-  checkVida(nuevoJuego);
+  return nuevoJuego;
 }
 
 function checkVecinos(juego, x, y) {
@@ -68,57 +68,8 @@ function checkVecinos(juego, x, y) {
   return contador;
 }
 
-// js html
-function crearTabla() {
-  /* if (borrarTabla() === false)
-    if (document.querySelector(".tablero") !== null)
-      document.querySelector(".tablero").remove(); */
-  const tamaño = +document.querySelector(".tamaño").value;
-  console.log(tamaño);
-  tablaTotal = Array(tamaño)
-    .fill(0)
-    .map(() => Array(tamaño).fill(0));
-  const nuevoTablero = document.createElement("div");
-  nuevoTablero.id = "tablero";
-  nuevoTablero.className = "nuevoTablero";
-
-  document.querySelector(".tablero").appendChild(nuevoTablero);
-
-  for (let i = 0; i < tablaTotal.length; i++) {
-    const nuevoDiv = document.createElement("div");
-    nuevoDiv.id = `row${i}`;
-    nuevoDiv.className = "row";
-    nuevoTablero.appendChild(nuevoDiv);
-  }
-  for (let i = 0; i < tablaTotal.length; i++) {
-    for (let j = 0; j < tablaTotal.length; j++) {
-      const nuevaCelula = document.createElement("div");
-      nuevaCelula.id = `${i}-${j}`;
-
-      if (tablaTotal[i][j] === 0) {
-        nuevaCelula.className = "col dead";
-        nuevaCelula.onclick = nuevoColor;
-      }
-      if (tablaTotal[i][j] === 1) {
-        nuevaCelula.className = "col alive";
-        nuevaCelula.onclick = nuevoColor;
-      }
-
-      document.getElementById(`row${i}`).appendChild(nuevaCelula);
-    }
-  }
-}
-
-function nuevoColor() {
-  const index = this.id.split("-");
-  const row = index[0];
-  const file = index[1];
-
-  if (this.className === "col dead") {
-    this.className = "col alive";
-    tablaTotal[row][file] = 1;
-  } else {
-    this.className = "col dead";
-    tablaTotal[row][file] = 0;
-  }
-}
+module.exports = {
+  checkVida,
+  checkVecinos,
+};
+console.log(checkVida(tablaTotal));
