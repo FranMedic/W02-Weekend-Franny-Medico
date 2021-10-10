@@ -1,4 +1,7 @@
-.body {
+@charset "UTF-8";
+body {
+  margin: 0;
+  padding: 0;
   font-family: "Play", sans-serif;
 }
 
@@ -7,33 +10,101 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
+  animation: fondo 7s infinite;
+  background: url("https://i.imgur.com/MjeqeUP.gif") no-repeat;
   align-items: center;
   background-color: hotpink;
+}
+
+.title {
+  font-family: "Play", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 200px;
+  margin: 10px;
+  font-size: 90px;
+  position: absolute;
+  left: 10px;
+  top: 100px;
+  font-weight: 800;
 }
 
 .tablero {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 10px;
 }
 .tablero .nuevoTablero {
-  background-color: blue;
   display: flex;
 }
 .tablero .nuevoTablero .col {
-  width: 40px;
-  height: 40px;
-  background-color: burlywood;
-  border: 2px solid black;
+  width: 50px;
+  height: 50px;
+  background-color: white;
+  border: 3px solid hotpink;
 }
 .tablero .nuevoTablero .alive {
-  background-color: chartreuse;
+  background: url("memeCat.png") no-repeat;
+  background-size: 100%;
 }
 
-.buttons {
-  width: 100px;
+.botones {
+  background: url("https://i.imgur.com/MjeqeUP.gif") no-repeat;
+  background-position: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 120px;
+  position: relative;
+}
+.botones label {
+  position: absolute;
+  top: 5px;
+  left: 230px;
+  font-size: 25px;
+  font-weight: 800;
+}
+.botones .tamaño {
+  font-family: "Play", sans-serif;
+  margin: 30px;
+  width: 200px;
+  height: 40px;
+  padding: 0 20px;
+  border: none;
+  font-size: 18px;
+}
+.botones .botones__crear {
+  font-family: "Play", sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  width: 200px;
   height: 50px;
+  margin: 10px;
+  border: none;
+}
+.botones .boton__play {
+  font-family: "Play", sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  width: 200px;
+  height: 50px;
+  padding: 10px;
+  margin: 10px;
+  border: none;
+}
+.botones .boton__stop {
+  font-family: "Play", sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  width: 200px;
+  height: 50px;
+  padding: 10px;
+  margin: 10px;
+  border: none;
 }
 
 /*# sourceMappingURL=styles.css.map */

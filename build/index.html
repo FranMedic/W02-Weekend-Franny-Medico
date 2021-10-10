@@ -15,6 +15,7 @@
   </head>
   <body>
     <div class="container">
+      <div class="title">Geim uf Laif</div>
       <div class="tablero"></div>
       <div class="botones">
         <label for="size">Introduce the size of the board: </label>
@@ -33,18 +34,18 @@
         />
         <input
           type="button"
-          class="buttons__play"
+          class="boton__play"
           onclick="gameLoop()"
           value="PLAY"
         />
         <input
           type="button"
-          class="buttons__stop"
-          onclick="gameLoop()"
+          class="boton__stop"
+          onclick="stopLoop()"
           value="Stop"
         />
       </div>
     </div>
   </body>
-  <script src="../prueba.js"></script>
+  <script src="game-of-life.js"></script>
 </html>
