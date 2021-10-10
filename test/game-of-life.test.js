@@ -1,4 +1,4 @@
-const { checkVida, checkVecinos } = require("../build/game-of-life");
+const { checkVida, checkVecinos } = require("./game-of-life-non-recursive");
 
 describe("When gave checkVida function", () => {
   describe("it recieves an array with 3 position, 2 of them neighbors", () => {
@@ -91,10 +91,10 @@ describe("When gave checkVida function", () => {
 describe("When gave checkVecinos function", () => {
   describe("it recieves and array and a position of the array in the middle", () => {
     test("it should return contador=2", () => {
-      const dimensionTabla = 5;
-      const tablaPrueba = Array(dimensionTabla)
+      const tamaño = 5;
+      const tablaPrueba = Array(tamaño)
         .fill(0)
-        .map(() => Array(dimensionTabla).fill(0));
+        .map(() => Array(tamaño).fill(0));
 
       tablaPrueba[1][0] = 1;
       tablaPrueba[1][1] = 1;
