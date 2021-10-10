@@ -1,9 +1,17 @@
-const tamaño = +document.querySelector(".tamaño").value;
-let tablaTotal = Array(tamaño)
+let size = 0;
+let tablaTotal = Array(size)
   .fill(0)
-  .map(() => Array(tamaño).fill(0)); // filas y columnas INVESTIGAR
+  .map(() => Array(size).fill(0));
 
+function borrarTabla() {
+  if (document.getElementById("tablero") !== undefined) {
+    return false;
+  }
+  return true;
+}
 function crearTabla() {
+  const tamaño = +document.querySelector(".tamaño").value;
+  size = tamaño;
   if (borrarTabla() === false)
     if (document.getElementById("tablero") !== null)
       document.getElementById("tablero").remove();
@@ -40,12 +48,7 @@ function crearTabla() {
     }
   }
 }
-function borrarTabla() {
-  if (document.getElementById("tablero") !== undefined) {
-    return false;
-  }
-  return true;
-}
+
 function nuevoColor() {
   const index = this.id.split("-");
   const filas = index[0];
@@ -86,7 +89,7 @@ function juegoVida(tabla, tamañoTabla) {
     .map(() => Array(tamañoTabla).fill(0));
 
   for (let i = 0; i < tabla.length; i++) {
-    for (let j = 0; j < tabla.length; j++) {
+    for (let j = 0; j < tabla[i].length; j++) {
       let contador = 0;
       // VERTICAL
 
@@ -118,11 +121,12 @@ function juegoVida(tabla, tamañoTabla) {
         if (tablaTotal[i + 1][j + 1] === 1) contador++;
       }
       nuevoJuego[i][j] = pintarCelulas(tablaTotal[i][j], contador);
+      // document.getElementById(`${i}-${j}`).style.backgroundColor = "green";
       if (nuevoJuego[i][j] === 0) {
-        document.getElementById(`${i}-${j}`).className = "col dead;";
+        document.getElementById(`${i}-${j}`).className = "col dead";
       }
       if (nuevoJuego[i][j] === 1) {
-        document.getElementById(`${i}-${j}`).className = "col alive;";
+        document.getElementById(`${i}-${j}`).className = "col alive";
       }
     }
   }
@@ -133,6 +137,6 @@ function juegoVida(tabla, tamañoTabla) {
 
 function gameLoop() {
   setInterval(() => {
-    tablaTotal = juegoVida(tablaTotal, tamaño);
-  });
+    tablaTotal = juegoVida(tablaTotal, size);
+  }, 1500);
 }
