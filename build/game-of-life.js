@@ -1,27 +1,69 @@
-const dimensionTabla = 5;
-const tablaTotal = Array(dimensionTabla)
-  .fill(0)
-  .map(() => Array(dimensionTabla).fill(0)); // filas y columnas INVESTIGAR
+const boardHTML = document.querySelector(".board");
+const size = document.querySelector("#size");
+const row = document.querySelectorAll(".board__rows");
+
+function createBoard(boardSize) {
+  const tablaTotal = Array(boardSize)
+    .fill(0)
+    .map(() => Array(boardSize).fill(0));
+  return tablaTotal;
+}
+
+function createCells() {
+  const boardDemo = document.createElement("div");
+  boardDemo.className = "board__boardDemo";
+  for (let i = 0; i < tablaTotal.length; i++) {
+    const newDivRows = document.createElement("div");
+    newDivRows.className = "board__rows";
+    boardHTML.appendChild(boardDemo);
+    boardDemo.appendChild(newDivRows);
+  }
+  for (let i = 0; i < tablaTotal.length; i++) {
+    for (let j = 0; j < tablaTotal[i].length; j++) {
+      const newDivCells = document.createElement("div");
+      newDivCells.className = "board__cell";
+      newDivCells.id = `${i}-${j}`;
+      newDivCells.onclick = changeCells;
+      row[i].appendChild(newDivCells);
+    }
+  }
+}
+
+function changeCells() {
+  const indexTable = this.id.split("-");
+  const row = indexTable[0];
+  const file = indexTab[1];
+
+  if (this.style.background === "black") {
+    this.style.background = "hotpink";
+    tablaTotal[row][file] = 1;
+  } else {
+    this.style.background = "black";
+    tablaTotal[row][file] = 0;
+  }
+}
+
+function startCreation() {
+  if (size < 5 || size > 20 || size === NaN) {
+    size.value = "Valor entre 5 y 20 porfavor";
+    size = 0;
+  }
+  const tablaTotal = createBoard(size);
+  createCells(size);
+}
+
 tablaTotal[1][2] = 1;
 tablaTotal[2][2] = 1;
 tablaTotal[3][2] = 1;
 
-// primero creamos ARRAY
-// segundo, leemos todas la posiciones del array
-// tercero, miramos cuantos vecinos tiene el array mirando en cada posicion sus 8 posibles vecinos
-// (si sus posiciones tienen un 1, el contador sube)
-// cuatro una vez recogidos, cuantos vecinos estan alrededor de cada posicion del array,
+function play() {}
+function stop() {}
 
 function checkVida(tabla) {
-  const nuevoJuego = Array(dimensionTabla)
-    .fill(0)
-    .map(() => Array(dimensionTabla).fill(0));
-  // if (count === 0) {
-  // return;
-  // }
+  const nuevoJuego = createBoard(size);
+
   for (let i = 0; i < tabla.length; i++) {
     for (let j = 0; j < tabla[i].length; j++) {
-      // eslint-disable-next-line no-use-before-define
       const vecinos = checkVecinos(tabla, i, j);
       if (tabla[i][j] === 1) {
         if (vecinos < 2) {
