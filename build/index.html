@@ -1,12 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es-ES">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Game of Life Franny Medico</title>
   </head>
   <body>
-    <h1>AYUDA NO ZE ARRAY</h1>
+    <div class="container">
+      <div class="board">
+        <div class="buttons">
+          <form>
+            <label for="size">Introduce the size of the board: </label>
+            <input
+              type="text"
+              id="size"
+              class="buttons__text"
+              placeholder="Introduce the size of the board"
+              required
+            />
+            <input
+              type="button"
+              class="buttons__create"
+              onclick="startCreation()"
+              value="Create Board"
+            />
+            <input
+              type="button"
+              class="buttons__play"
+              onclick="play()"
+              value="PLAY"
+            />
+            <input
+              type="button"
+              class="buttons__stop"
+              onclick="stop()"
+              value="Stop"
+            />
+          </form>
+        </div>
+      </div>
+    </div>
   </body>
+  <script src="game-of-life.js"></script>
 </html>
