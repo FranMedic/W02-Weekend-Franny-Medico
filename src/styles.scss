@@ -5,15 +5,32 @@
   width: 100vw;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+
   align-items: center;
   background-color: hotpink;
 }
-.board {
-  background-color: black;
+.tablero {
   display: flex;
   justify-content: center;
+  align-items: center;
+  .nuevoTablero {
+    background-color: blue;
+    display: flex;
+
+    .col {
+      width: 40px;
+      height: 40px;
+      background-color: burlywood;
+      border: 2px solid black;
+    }
+    .alive {
+      background-color: chartreuse;
+    }
+  }
 }
+
 .buttons {
   width: 100px;
   height: 50px;

@@ -10,43 +10,41 @@
       href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="StyleSheet" href="styles.css" type="text/css" media="screen" />
     <title>Game of Life Franny Medico</title>
   </head>
   <body>
     <div class="container">
-      <div class="board">
-        <div class="buttons">
-          <form>
-            <label for="size">Introduce the size of the board: </label>
-            <input
-              type="text"
-              id="size"
-              class="buttons__text"
-              placeholder="Introduce the size of the board"
-              required
-            />
-            <input
-              type="button"
-              class="buttons__create"
-              onclick="startCreation()"
-              value="Create Board"
-            />
-            <input
-              type="button"
-              class="buttons__play"
-              onclick="play()"
-              value="PLAY"
-            />
-            <input
-              type="button"
-              class="buttons__stop"
-              onclick="stop()"
-              value="Stop"
-            />
-          </form>
-        </div>
+      <div class="tablero"></div>
+      <div class="botones">
+        <label for="size">Introduce the size of the board: </label>
+        <input
+          type="text"
+          id="tamaño"
+          class="tamaño"
+          placeholder="Introduce the size of the board"
+          required
+        />
+        <input
+          type="submit"
+          class="botones__crear"
+          onclick="crearTabla()"
+          value="Create Board"
+        />
+        <input
+          type="button"
+          class="buttons__play"
+          onclick="gameLoop()"
+          value="PLAY"
+        />
+        <input
+          type="button"
+          class="buttons__stop"
+          onclick="gameLoop()"
+          value="Stop"
+        />
       </div>
     </div>
   </body>
-  <script src="game-of-life.js"></script>
+  <script src="../prueba.js"></script>
 </html>

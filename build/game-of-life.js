@@ -1,69 +1,16 @@
-const boardHTML = document.querySelector(".board");
-const size = document.querySelector("#size");
-const row = document.querySelectorAll(".board__rows");
-
-function createBoard(boardSize) {
-  const tablaTotal = Array(boardSize)
-    .fill(0)
-    .map(() => Array(boardSize).fill(0));
-  return tablaTotal;
-}
-
-function createCells() {
-  const boardDemo = document.createElement("div");
-  boardDemo.className = "board__boardDemo";
-  for (let i = 0; i < tablaTotal.length; i++) {
-    const newDivRows = document.createElement("div");
-    newDivRows.className = "board__rows";
-    boardHTML.appendChild(boardDemo);
-    boardDemo.appendChild(newDivRows);
-  }
-  for (let i = 0; i < tablaTotal.length; i++) {
-    for (let j = 0; j < tablaTotal[i].length; j++) {
-      const newDivCells = document.createElement("div");
-      newDivCells.className = "board__cell";
-      newDivCells.id = `${i}-${j}`;
-      newDivCells.onclick = changeCells;
-      row[i].appendChild(newDivCells);
-    }
-  }
-}
-
-function changeCells() {
-  const indexTable = this.id.split("-");
-  const row = indexTable[0];
-  const file = indexTab[1];
-
-  if (this.style.background === "black") {
-    this.style.background = "hotpink";
-    tablaTotal[row][file] = 1;
-  } else {
-    this.style.background = "black";
-    tablaTotal[row][file] = 0;
-  }
-}
-
-function startCreation() {
-  if (size < 5 || size > 20 || size === NaN) {
-    size.value = "Valor entre 5 y 20 porfavor";
-    size = 0;
-  }
-  const tablaTotal = createBoard(size);
-  createCells(size);
-}
-
-tablaTotal[1][2] = 1;
-tablaTotal[2][2] = 1;
-tablaTotal[3][2] = 1;
-
-function play() {}
-function stop() {}
+console.log(tamaño);
+let tablaTotal = Array(tamaño)
+  .fill(0)
+  .map(() => Array(tamaño).fill(0)); // filas y columnas INVESTIGAR
 
 function checkVida(tabla) {
-  const nuevoJuego = createBoard(size);
+  const nuevoJuego = Array(tamaño)
+    .fill(0)
+    .map(() => Array(tamaño).fill(0));
 
   for (let i = 0; i < tabla.length; i++) {
     for (let j = 0; j < tabla[i].length; j++) {
+      // eslint-disable-next-line no-use-before-define
       const vecinos = checkVecinos(tabla, i, j);
       if (tabla[i][j] === 1) {
         if (vecinos < 2) {
@@ -84,7 +31,7 @@ function checkVida(tabla) {
     }
   }
 
-  return nuevoJuego;
+  checkVida(nuevoJuego);
 }
 
 function checkVecinos(juego, x, y) {
@@ -121,7 +68,57 @@ function checkVecinos(juego, x, y) {
   return contador;
 }
 
-module.exports = {
-  checkVida,
-  checkVecinos,
-};
+// js html
+function crearTabla() {
+  /* if (borrarTabla() === false)
+    if (document.querySelector(".tablero") !== null)
+      document.querySelector(".tablero").remove(); */
+  const tamaño = +document.querySelector(".tamaño").value;
+  console.log(tamaño);
+  tablaTotal = Array(tamaño)
+    .fill(0)
+    .map(() => Array(tamaño).fill(0));
+  const nuevoTablero = document.createElement("div");
+  nuevoTablero.id = "tablero";
+  nuevoTablero.className = "nuevoTablero";
+
+  document.querySelector(".tablero").appendChild(nuevoTablero);
+
+  for (let i = 0; i < tablaTotal.length; i++) {
+    const nuevoDiv = document.createElement("div");
+    nuevoDiv.id = `row${i}`;
+    nuevoDiv.className = "row";
+    nuevoTablero.appendChild(nuevoDiv);
+  }
+  for (let i = 0; i < tablaTotal.length; i++) {
+    for (let j = 0; j < tablaTotal.length; j++) {
+      const nuevaCelula = document.createElement("div");
+      nuevaCelula.id = `${i}-${j}`;
+
+      if (tablaTotal[i][j] === 0) {
+        nuevaCelula.className = "col dead";
+        nuevaCelula.onclick = nuevoColor;
+      }
+      if (tablaTotal[i][j] === 1) {
+        nuevaCelula.className = "col alive";
+        nuevaCelula.onclick = nuevoColor;
+      }
+
+      document.getElementById(`row${i}`).appendChild(nuevaCelula);
+    }
+  }
+}
+
+function nuevoColor() {
+  const index = this.id.split("-");
+  const row = index[0];
+  const file = index[1];
+
+  if (this.className === "col dead") {
+    this.className = "col alive";
+    tablaTotal[row][file] = 1;
+  } else {
+    this.className = "col dead";
+    tablaTotal[row][file] = 0;
+  }
+}
