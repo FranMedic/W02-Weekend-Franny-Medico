@@ -1,80 +1,20 @@
-console.log(tamaño);
-let tablaTotal = Array(tamaño)
+let size = 0;
+let tablaTotal = Array(size)
   .fill(0)
-  .map(() => Array(tamaño).fill(0)); // filas y columnas INVESTIGAR
+  .map(() => Array(size).fill(0));
 
-function checkVida(tabla) {
-  const nuevoJuego = Array(tamaño)
-    .fill(0)
-    .map(() => Array(tamaño).fill(0));
-
-  for (let i = 0; i < tabla.length; i++) {
-    for (let j = 0; j < tabla[i].length; j++) {
-      // eslint-disable-next-line no-use-before-define
-      const vecinos = checkVecinos(tabla, i, j);
-      if (tabla[i][j] === 1) {
-        if (vecinos < 2) {
-          nuevoJuego[i][j] = 0;
-        } else if (vecinos > 3) {
-          nuevoJuego[i][j] = 0;
-        } else if (vecinos === 2 || vecinos === 3) {
-          nuevoJuego[i][j] = 1;
-        }
-      }
-      if (tabla[i][j] === 0) {
-        if (vecinos === 3) {
-          nuevoJuego[i][j] = 1;
-        } else {
-          nuevoJuego[i][j] = 0;
-        }
-      }
-    }
+function borrarTabla() {
+  if (document.getElementById("tablero") !== undefined) {
+    return false;
   }
-
-  checkVida(nuevoJuego);
+  return true;
 }
-
-function checkVecinos(juego, x, y) {
-  let contador = 0;
-  // VERTICAL
-
-  if (juego[x - 1] !== undefined) {
-    if (juego[x - 1][y] === 1) contador++;
-  }
-  if (juego[x + 1] !== undefined) {
-    if (juego[x + 1][y] === 1) contador++;
-  }
-  // HORIZONTAL
-  if (juego[x] !== undefined) {
-    if (juego[x][y - 1] === 1) contador++;
-  }
-  if (juego[x] !== undefined) {
-    if (juego[x][y + 1] === 1) contador++;
-  }
-  // DIAGONALes  ARRIBA
-  if (juego[x - 1] !== undefined) {
-    if (juego[x - 1][y - 1] === 1) contador++;
-  }
-  if (juego[x - 1] !== undefined) {
-    if (juego[x - 1][y + 1] === 1) contador++;
-  }
-  // DIAGONALES ABAJO
-  if (juego[x + 1] !== undefined) {
-    if (juego[x + 1][y - 1] === 1) contador++;
-  }
-  if (juego[x + 1] !== undefined) {
-    if (juego[x + 1][y + 1] === 1) contador++;
-  }
-  return contador;
-}
-
-// js html
 function crearTabla() {
-  /* if (borrarTabla() === false)
-    if (document.querySelector(".tablero") !== null)
-      document.querySelector(".tablero").remove(); */
   const tamaño = +document.querySelector(".tamaño").value;
-  console.log(tamaño);
+  size = tamaño;
+  if (borrarTabla() === false)
+    if (document.getElementById("tablero") !== null)
+      document.getElementById("tablero").remove();
   tablaTotal = Array(tamaño)
     .fill(0)
     .map(() => Array(tamaño).fill(0));
@@ -111,14 +51,96 @@ function crearTabla() {
 
 function nuevoColor() {
   const index = this.id.split("-");
-  const row = index[0];
-  const file = index[1];
+  const filas = index[0];
+  const columnas = index[1];
 
   if (this.className === "col dead") {
     this.className = "col alive";
-    tablaTotal[row][file] = 1;
+    tablaTotal[filas][columnas] = 1;
   } else {
     this.className = "col dead";
-    tablaTotal[row][file] = 0;
+    tablaTotal[filas][columnas] = 0;
   }
+}
+
+function pintarCelulas(existencia, vecinos) {
+  if (existencia === 1) {
+    if (vecinos < 2) {
+      return 0;
+    }
+    if (vecinos > 3) {
+      return 0;
+    }
+    if (vecinos === 2 || vecinos === 3) {
+      return 1;
+    }
+  }
+  if (existencia === 0) {
+    if (vecinos === 3) {
+      return 1;
+    }
+    return 0;
+  }
+}
+
+function juegoVida(tabla, tamañoTabla) {
+  const nuevoJuego = Array(tamañoTabla)
+    .fill(0)
+    .map(() => Array(tamañoTabla).fill(0));
+
+  for (let i = 0; i < tabla.length; i++) {
+    for (let j = 0; j < tabla[i].length; j++) {
+      let contador = 0;
+      // VERTICAL
+
+      if (tablaTotal[i - 1] !== undefined) {
+        if (tablaTotal[i - 1][j] === 1) contador++;
+      }
+      if (tablaTotal[i + 1] !== undefined) {
+        if (tablaTotal[i + 1][j] === 1) contador++;
+      }
+      // HORIZONTAL
+      if (tablaTotal[i] !== undefined) {
+        if (tablaTotal[i][j - 1] === 1) contador++;
+      }
+      if (tablaTotal[i] !== undefined) {
+        if (tablaTotal[i][j + 1] === 1) contador++;
+      }
+      // DIAGONALes  ARRIBA
+      if (tablaTotal[i - 1] !== undefined) {
+        if (tablaTotal[i - 1][j - 1] === 1) contador++;
+      }
+      if (tablaTotal[i - 1] !== undefined) {
+        if (tablaTotal[i - 1][j + 1] === 1) contador++;
+      }
+      // DIAGONALES ABAJO
+      if (tablaTotal[i + 1] !== undefined) {
+        if (tablaTotal[i + 1][j - 1] === 1) contador++;
+      }
+      if (tablaTotal[i + 1] !== undefined) {
+        if (tablaTotal[i + 1][j + 1] === 1) contador++;
+      }
+      nuevoJuego[i][j] = pintarCelulas(tablaTotal[i][j], contador);
+      // document.getElementById(`${i}-${j}`).style.backgroundColor = "green";
+      if (nuevoJuego[i][j] === 0) {
+        document.getElementById(`${i}-${j}`).className = "col dead";
+      }
+      if (nuevoJuego[i][j] === 1) {
+        document.getElementById(`${i}-${j}`).className = "col alive";
+      }
+    }
+  }
+  tablaTotal = nuevoJuego;
+  return tablaTotal;
+}
+const loop = null;
+
+function gameLoop() {
+  setInterval(() => {
+    tablaTotal = juegoVida(tablaTotal, size);
+  }, 1500);
+}
+
+function stopLoop() {
+  clearInterval(loop);
 }
